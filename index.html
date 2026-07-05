@@ -36,13 +36,7 @@
       radial-gradient(55vw 45vh at -10% 110%, #eae6ff 0%, transparent 60%),
       var(--bg);
   }
-  body::before{ /* ince nokta ızgara */
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-    background-image:radial-gradient(#c9d0ee 1px, transparent 1.4px);
-    background-size:26px 26px;
-    -webkit-mask-image:radial-gradient(90vw 90vh at 50% 45%, #000 40%, transparent 85%);
-            mask-image:radial-gradient(90vw 90vh at 50% 45%, #000 40%, transparent 85%);
-  }
+  body::before{display:none}
   .deck{position:relative;height:100vh;width:100vw;z-index:1}
   .slide{position:absolute;inset:0;display:none;opacity:0;transform:translateY(12px);
     transition:opacity .4s ease,transform .4s ease}
@@ -51,8 +45,7 @@
     display:flex;flex-direction:column;justify-content:flex-start;position:relative}
 
   /* dev level filigranı — boş alanı doldurur */
-  .ghost{position:absolute;right:2.5vw;bottom:8vh;font-size:34vh;line-height:.8;font-weight:900;
-    color:var(--p1);opacity:.06;z-index:0;letter-spacing:-.04em;pointer-events:none;user-select:none}
+  .ghost{display:none}
   .wrap>*{position:relative;z-index:1}
 
   /* ---------- HUD ---------- */
@@ -76,6 +69,7 @@
   .lvltag{display:inline-flex;align-items:center;gap:.55rem;font-weight:800;letter-spacing:.12em;
     text-transform:uppercase;font-size:.9rem;color:var(--p1);background:var(--tint);
     padding:.5rem 1.05rem;border-radius:999px;border:1px solid #dde0f6;margin-bottom:0.7rem;align-self:flex-start}
+  .lvltag + h2{margin-top:0.9rem}
   h1{font-size:clamp(3rem,7vw,5.8rem);line-height:1;font-weight:900;letter-spacing:-.025em}
   h2{font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:1.05;font-weight:900;margin-bottom:0.6rem;letter-spacing:-.02em}
   p.lead{font-size:clamp(1.15rem,2.1vw,1.65rem);color:var(--muted);max-width:60ch;line-height:1.5;font-weight:600}
@@ -113,13 +107,13 @@
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem 1.5rem;
     box-shadow:var(--sh-sm);transition:transform .2s ease,box-shadow .2s ease}
   .card:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
-  .card .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin-bottom:.9rem;background:var(--tint)}
+  .card .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin:0 auto .9rem;background:var(--tint)}
   .cards .card:nth-child(4n+1) .ic{background:#efeaff}
   .cards .card:nth-child(4n+2) .ic{background:#e3f7ee}
   .cards .card:nth-child(4n+3) .ic{background:#e5f0ff}
   .cards .card:nth-child(4n+4) .ic{background:#fff2d6}
-  .card .big{font-size:1.35rem;font-weight:900;margin-bottom:.4rem}
-  .card .t{color:var(--muted);font-size:1.05rem;font-weight:600;line-height:1.45}
+  .card .big{font-size:1.35rem;font-weight:900;margin-bottom:.4rem;text-align:center}
+  .card .t{color:var(--muted);font-size:1.05rem;font-weight:600;line-height:1.45;text-align:center}
   .card .n{font-size:clamp(2.6rem,4.5vw,3.6rem);font-weight:900;line-height:1;margin-bottom:.3rem}
 
   /* İki sütun */
@@ -137,7 +131,7 @@
     transition:top .9s cubic-bezier(.4,0,.2,1),left .9s cubic-bezier(.4,0,.2,1),
       right .9s cubic-bezier(.4,0,.2,1),bottom .9s cubic-bezier(.4,0,.2,1),
       transform .9s cubic-bezier(.4,0,.2,1)}
-  .spk{display:block;height:auto;filter:drop-shadow(0 2px 5px rgba(32,35,58,.12));
+  .spk{display:block;height:auto;filter:drop-shadow(0 2px 5px rgba(32,35,58,.12)) drop-shadow(0 0 8px rgba(255,255,255,.45));
     animation:twinkle var(--dur,2.6s) ease-in-out infinite;animation-delay:var(--d,0s)}
   @keyframes twinkle{
     0%,100%{opacity:var(--op-a,.4);transform:scale(1) rotate(0deg)}
@@ -211,6 +205,11 @@
   @keyframes boss-hp-anim{0%,100%{width:15px;fill:#22c55e}50%{width:105px;fill:#ef4444}}
   @keyframes comp-eat{0%,100%{transform:translate(0,0);opacity:1}40%{transform:translate(-50,22);opacity:.6}50%{transform:translate(-55,28);opacity:0}}
   @keyframes photo-glow{0%,100%{box-shadow:0 0 0 4px #eef2ff,0 8px 32px rgba(108,92,231,.25)}50%{box-shadow:0 0 0 6px #eef2ff,0 8px 48px rgba(108,92,231,.45)}}
+  .bg-fx>.spk-pos:nth-child(5n+1) .spk path{fill:#d9c2ff!important;stroke:#b794f4!important}
+  .bg-fx>.spk-pos:nth-child(5n+2) .spk path{fill:#a8e6cf!important;stroke:#7bc9a8!important}
+  .bg-fx>.spk-pos:nth-child(5n+3) .spk path{fill:#ffc8c8!important;stroke:#e8a0a0!important}
+  .bg-fx>.spk-pos:nth-child(5n+4) .spk path{fill:#ffecb3!important;stroke:#e8d080!important}
+  .bg-fx>.spk-pos:nth-child(5n+5) .spk path{fill:#b5d8ff!important;stroke:#8ab8e8!important}
   .active .lvltag{animation:pop .45s ease}
   .active .boss-hp{animation:boss-hp-anim 3s linear infinite}
   .active .comp{animation:comp-eat 3.5s ease-in-out infinite}
@@ -278,6 +277,18 @@
   <div class="spk-pos" style="top:11vh;right:1.5vw" data-t="11" data-r="1.5"><svg class="spk" style="width:36px;--op-a:.6;--op-b:1;--d:.9s;--dur:2.7s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#d4a574" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
   <div class="spk-pos" style="bottom:15vh;left:1.5vw" data-b="15" data-l="1.5"><svg class="spk" style="width:38px;--op-a:.55;--op-b:.95;--d:1.5s;--dur:2.9s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#c9a49d" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
   <div class="spk-pos" style="bottom:14vh;right:1.5vw" data-b="14" data-r="1.5"><svg class="spk" style="width:34px;--op-a:.55;--op-b:.95;--d:2.1s;--dur:2.5s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#b8956a" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+
+  <!-- iç kısımda ekstra minik yıldızlar -->
+  <div class="spk-pos" style="top:22vh;left:25vw" data-t="22" data-l="25"><svg class="spk" style="width:10px;--op-a:.4;--op-b:.8;--d:.1s;--dur:2.2s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#d4a574" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:35vh;right:30vw" data-t="35" data-r="30"><svg class="spk" style="width:8px;--op-a:.35;--op-b:.75;--d:.5s;--dur:2.5s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#c9a49d" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:50vh;left:40vw" data-t="50" data-l="40"><svg class="spk" style="width:11px;--op-a:.45;--op-b:.85;--d:1s;--dur:2.8s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#b8956a" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:65vh;right:35vw" data-t="65" data-r="35"><svg class="spk" style="width:9px;--op-a:.4;--op-b:.8;--d:1.3s;--dur:2.3s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#c7a78b" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:78vh;left:50vw" data-t="78" data-l="50"><svg class="spk" style="width:7px;--op-a:.35;--op-b:.7;--d:.3s;--dur:2.6s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#bfa58a" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:18vh;right:15vw" data-t="18" data-r="15"><svg class="spk" style="width:8px;--op-a:.4;--op-b:.8;--d:1.7s;--dur:2.4s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#d4a574" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:40vh;left:55vw" data-t="40" data-l="55"><svg class="spk" style="width:10px;--op-a:.45;--op-b:.85;--d:.8s;--dur:2.7s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#c9a49d" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:55vh;left:20vw" data-t="55" data-l="20"><svg class="spk" style="width:7px;--op-a:.35;--op-b:.7;--d:2s;--dur:2.9s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#b8956a" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:72vh;right:20vw" data-t="72" data-r="20"><svg class="spk" style="width:9px;--op-a:.4;--op-b:.8;--d:.6s;--dur:2.2s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#c7a78b" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
+  <div class="spk-pos" style="top:30vh;left:50vw" data-t="30" data-l="50"><svg class="spk" style="width:6px;--op-a:.3;--op-b:.65;--d:1.5s;--dur:2.5s" viewBox="0 0 24 24"><path d="M12,0 L14,9 L22,12 L14,15 L12,24 L10,15 L2,12 L10,9 Z" fill="#bfa58a" stroke="#8b7355" stroke-width="1" stroke-linejoin="round"/></svg></div>
 </div>
 
 <!-- ===== HUD ===== -->
@@ -300,14 +311,13 @@
 
   <!-- 1 · TITLE -->
   <section class="slide" data-xp="0" data-badge="">
-    <div class="wrap" style="padding-top:14vh;justify-content:center">
+    <div class="wrap" style="padding-top:8vh;justify-content:center">
       <div class="two">
         <div>
-          <span class="lvltag">🎮 Başlangıç Ekranı · Takım</span>
-          <div class="teamhero"><span class="brand">Logic<span class="amp">&</span>Magic</span></div>
+          <div class="teamhero" style="margin-top:5rem"><span class="brand">Logic<span class="amp">&</span>Magic</span></div>
           <h1 class="hero-subtitle"><span class="grad">Birinciliğe Giden Yol</span></h1>
           <span class="hero-accent"></span>
-          <span class="press">▶ PRESS START — (→ ile başla)</span>
+          <span class="press">▶ PRESS START (→ ile başla)</span>
         </div>
         <div class="art hero-art">
           <svg id="hero-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
@@ -441,7 +451,7 @@
   <section class="slide" data-xp="20" data-badge="Görevi kabul ettin! 📜">
     <div class="wrap">
       <span class="lvltag">📜 Görev Brifingi</span>
-      <h2 style="text-align:center">Tek cümlede: ne başardık?</h2>
+      <h2 style="text-align:center;margin-bottom:3rem">Tek cümlede: ne başardık?</h2>
       <div class="two">
         <p class="lead">DCS Hackaton'da, yapay zekâ kullanarak bir <b>Retro Uygulaması</b> geliştirdik ve
           <span class="grad" style="font-weight:900">1.'lik</span> kazandık.</p>
@@ -578,12 +588,12 @@
   <section class="slide" data-xp="50" data-badge="Düşman tespit edildi 👾">
     <div class="wrap">
       <span class="lvltag">👾 Bölüm 3 · Karşımızdaki Düşman</span>
-      <h2 style="text-align:center">Çözülmesi Beklenen Sorun</h2>
-      <div class="two" style="margin-top:1.5vh">
+      <h2 style="text-align:center;margin-bottom:1.2rem">Çözülmesi Beklenen Sorun</h2>
+      <div class="two" style="margin-top:5vh">
         <div>
           <ul style="color:var(--muted)">
-            <li><span class="tag">Sorun</span> Retro toplantılarında alınan aksiyon kararları dış platformlarda kayboluyor, takip edilemiyor ve unutuluyor.</li>
-            <li><span class="tag">Görev</span> Yapay zeka destekli, aksiyon maddelerini otomatik çıkaran ve takip eden bir Retro uygulaması geliştirmek.</li>
+            <li>⚠️ <b>Sorun:</b> Retro toplantılarında alınan aksiyon kararları dış platformlarda kayboluyor, takip edilemiyor ve unutuluyor.</li>
+            <li>🎯 <b>Görev:</b> Yapay zeka destekli, aksiyon maddelerini otomatik çıkaran ve takip eden bir Retro uygulaması geliştirmek.</li>
           </ul>
         </div>
         <div class="art">
@@ -704,7 +714,7 @@
   <section class="slide" data-xp="65" data-badge="Tribünler coştu! 📱">
     <div class="wrap">
       <span class="lvltag">📱 Özel Bölüm · Tribün Desteği</span>
-      <div style="display:flex;flex-direction:column;gap:0;max-width:680px;margin:1rem auto 0;width:100%">
+      <div style="display:flex;flex-direction:column;gap:0;max-width:680px;margin:1.9rem auto 0;width:100%">
         <div style="display:flex;gap:.3rem;align-items:flex-end"><div style="background:#075e54;border-radius:18px 18px 18px 4px;padding:.35rem;flex:0 0 auto;width:300px;box-shadow:var(--sh-sm);line-height:0;position:relative"><div style="position:absolute;left:-10px;bottom:10px;width:18px;height:18px;background:#075e54;clip-path:polygon(100% 0,0 100%,100% 100%)"></div><img src="img/gulizar-wp2.jpeg" alt="" style="width:100%;height:auto;display:block;border-radius:11px"></div></div>
         <div style="display:flex;gap:.3rem;align-items:flex-end;justify-content:flex-end"><div style="background:#075e54;border-radius:18px 18px 4px 18px;padding:.35rem;flex:0 0 auto;width:300px;box-shadow:var(--sh-sm);line-height:0;position:relative"><div style="position:absolute;right:-10px;bottom:10px;width:18px;height:18px;background:#075e54;clip-path:polygon(0 0,0 100%,100% 100%)"></div><img src="img/salimcan-wp.jpeg" alt="" style="width:100%;height:auto;display:block;border-radius:11px"></div></div>
         <div style="display:flex;gap:.3rem;align-items:flex-end"><div style="background:#075e54;border-radius:18px 18px 18px 4px;padding:.35rem;flex:0 0 auto;width:300px;box-shadow:var(--sh-sm);line-height:0;position:relative"><div style="position:absolute;left:-10px;bottom:10px;width:18px;height:18px;background:#075e54;clip-path:polygon(100% 0,0 100%,100% 100%)"></div><img src="img/sena-wp.jpeg" alt="" style="width:100%;height:auto;display:block;border-radius:11px"></div></div>
@@ -720,8 +730,8 @@
   <section class="slide" data-xp="70" data-badge="Power-up alındı! ⚡">
     <div class="wrap">
       <span class="lvltag">⚡ Bölüm 4 · Güçlerimiz</span>
-      <h2 style="text-align:center">Çözümümüz: <span class="edit">MagicRo</span></h2>
-      <div class="cards" style="margin-top:2.2rem">
+      <h2 style="text-align:center;margin-bottom:1.2rem">Çözümümüz: <span class="edit">MagicRo</span></h2>
+      <div class="cards" style="margin-top:4rem">
         <div class="card"><div class="ic">📋</div><div class="big">Jira Entegrasyonu</div><div class="t">Gündem maddeleri tek tıkla Jira'ya task olarak açılır, takip edilir.</div></div>
         <div class="card"><div class="ic">📧</div><div class="big">Mail Bildirimi</div><div class="t">Retro çıktıları otomatik olarak yöneticiye e-posta ile iletilir.</div></div>
         <div class="card"><div class="ic">🤖</div><div class="big">AI ile Aksiyon</div><div class="t">Yapay zeka, toplantı notlarından aksiyon maddeleri çıkarır ve önceliklendirir.</div></div>
@@ -765,26 +775,48 @@
   </section>
 
   <!-- 11 · VICTORY -->
-  <section class="slide" data-xp="100" data-badge="VICTORY! 🎉">
-    <div class="wrap" style="text-align:center;align-items:center">
-      <span class="lvltag">🏆 Oyun Tamamlandı</span>
-      <div style="display:flex;gap:4rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:1.2rem">
-        <div style="flex-shrink:0">
-          <div style="width:min(520px,85vw);border-radius:14px;overflow:hidden;border:2px solid;border-image:linear-gradient(120deg,var(--p1),var(--p3),var(--p1)) 1;box-shadow:0 12px 48px rgba(108,92,231,.25)">
-            <img src="img/team-photo.jpg" alt="Ekip fotoğrafı" style="width:100%;height:auto;display:block">
-          </div>
+    <section class="slide" data-xp="100" data-badge="VICTORY! 🎉">
+        <div class="wrap" style="text-align:center;align-items:center">
+            <span class="lvltag">🏆 Oyun Tamamlandı</span>
+
+            <div style="display:flex;gap:1.5rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:1rem">
+                <div style="flex-shrink:0">
+                    <div style="width:min(1200px,100vw);border-radius:14px;overflow:hidden;border:2px solid;border-image:linear-gradient(120deg,var(--p1),var(--p3),var(--p1)) 1;box-shadow:0 12px 48px rgba(108,92,231,.25)">
+                        <img
+                                src="img/team-photo.jpeg"
+                                alt="Ekip fotoğrafı"
+                                style="width:100%;height:auto;display:block"
+                        >
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="teamhero">
+                        <span class="brand">Logic<span class="amp">&</span>Magic</span>
+                    </div>
+                    <h1>🏆</h1>
+                </div>
+            </div>
+
+            <div style="position:absolute;right:.2rem;bottom:6vh;display:flex;flex-direction:column;align-items:center;gap:.5rem">
+                <div style="width:160px;height:160px;border-radius:16px;overflow:hidden;border:3px solid var(--panel);box-shadow:0 8px 30px rgba(108,92,231,.2);background:#fff">
+                    <img
+                            src="img/qr.jpeg"
+                            alt="QR Kod"
+                            style="width:100%;height:100%;object-fit:cover;display:block"
+                    >
+                </div>
+                <div style="background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:.35rem 1rem;font-weight:800;font-size:.85rem;color:var(--p1);white-space:nowrap">
+                    📱 Hadi Katıl
+                </div>
+            </div>
         </div>
-        <div>
-          <div class="teamhero"><span class="brand">Logic<span class="amp">&</span>Magic</span></div>
-          <h1> 🏆</h1>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
 </div>
 
-<div class="footer"><span>🎮 <span class="brand">Logic<span class="amp">&</span>Magic</span></span><span id="pageNum">1 / 11</span></div>
+
 <div class="nav">
   <button id="prev" aria-label="Önceki">‹</button>
   <button id="next" aria-label="Sonraki">›</button>
@@ -819,7 +851,6 @@
   }
   setInterval(()=>scatterStars(1.4,1.1,24),2600);
 
-  const pageNum=document.getElementById('pageNum');
   const xpfill=document.getElementById('xpfill');
   const lvlLabel=document.getElementById('lvlLabel');
   const scoreEl=document.getElementById('score');
@@ -857,7 +888,6 @@
     i=Math.max(0,Math.min(total-1,n));
     if(i!==prevI)scatterStars(6,5,360);
     slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-    pageNum.textContent=(i+1)+' / '+total;
     const xp=+slides[i].dataset.xp||0;
     xpfill.style.width=xp+'%';
     lvlLabel.textContent='LV '+(i+1);
